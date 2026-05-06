@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini dark-mode">
+<body class="hold-transition sidebar-mini ">
 
 <div class="wrapper">
 

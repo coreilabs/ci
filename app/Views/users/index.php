@@ -44,13 +44,13 @@
 
                                 <?php if (hasPermission('users.manage')): ?>
 
-                                    <a href="<?= base_url('users/edit/' . $u['id']) ?>"
+                                    <a href="<?= base_url('usuarios/edit/' . $u['id']) ?>"
                                        class="btn btn-sm btn-warning"
                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                    <a href="<?= base_url('users/delete/' . $u['id']) ?>"
+                                    <a href="<?= base_url('usuarios/delete/' . $u['id']) ?>"
                                        class="btn btn-sm btn-danger"
                                        title="Excluir"
                                        onclick="return confirm('Tem certeza que deseja excluir este usuário?')">

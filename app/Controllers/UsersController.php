@@ -66,7 +66,7 @@ class UsersController extends BaseController
 
         $model->save($data);
 
-        return redirect()->to('/users')->with('success', 'Usuário criado com sucesso');
+        return redirect()->to('/usuarios')->with('success', 'Usuário criado com sucesso');
     }
 
     /**
@@ -85,7 +85,7 @@ class UsersController extends BaseController
         $data['roles'] = $db->table('roles')->get()->getResultArray();
 
         if (!$data['user']) {
-            return redirect()->to('/users');
+            return redirect()->to('/usuarios');
         }
 
         return view('users/edit', $data);
@@ -129,7 +129,7 @@ class UsersController extends BaseController
 
         $model->update($id, $data);
 
-        return redirect()->to('/users')->with('success', 'Usuário atualizado com sucesso');
+        return redirect()->to('/usuarios')->with('success', 'Usuário atualizado com sucesso');
     }
 
     /**

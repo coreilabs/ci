@@ -9,7 +9,7 @@
 
     <div class="card-body">
 
-        <form method="post" action="<?= base_url('users/store') ?>">
+        <form method="post" action="<?= base_url('usuarios/store') ?>">
 
             <div class="form-group">
                 <label>Nome</label>
