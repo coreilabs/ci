@@ -6,33 +6,71 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// 🔐 Autenticação
+// 🔐 AUTENTICAÇÃO
+
 $routes->get('/', 'AuthController::login');
+
 $routes->get('login', 'AuthController::login');
+
 $routes->post('login', 'AuthController::attempt');
+
 $routes->get('logout', 'AuthController::logout');
 
-// 🔒 Rotas protegidas
+
+// 🔒 ROTAS PROTEGIDAS
+
 $routes->group('', ['filter' => 'auth'], function ($routes) {
 
-    // 📊 Dashboard
+    /*
+    |--------------------------------------------------------------------------
+    | DASHBOARD
+    |--------------------------------------------------------------------------
+    */
+
     $routes->get('painel', 'DashboardController::index', [
         'filter' => 'permission:dashboard.view'
     ]);
 
-    // 👥 Usuários (CRUD completo)
-    $routes->group('usuarios', ['filter' => 'permission:users.manage'], function ($routes) {
 
-        $routes->get('/', 'UsersController::index');
-        $routes->get('create', 'UsersController::create');
-        $routes->post('store', 'UsersController::store');
+    /*
+    |--------------------------------------------------------------------------
+    | USUÁRIOS
+    |--------------------------------------------------------------------------
+    */
 
-        // ✏️ editar
-        $routes->get('edit/(:num)', 'UsersController::edit/$1');
-        $routes->post('update/(:num)', 'UsersController::update/$1');
+    // LISTAGEM
+    $routes->get('usuarios', 'UsersController::index', [
+        'filter' => 'permission:users.view,users.manage'
+    ]);
 
-        // 🗑 deletar
-        $routes->get('delete/(:num)', 'UsersController::delete/$1');
-    });
+    // AJAX DATATABLES
+    $routes->post('usuarios/ajax-list', 'UsersController::ajaxList', [
+        'filter' => 'permission:users.view,users.manage'
+    ]);
+
+    // FORM CREATE
+    $routes->get('usuarios/create', 'UsersController::create', [
+        'filter' => 'permission:users.manage'
+    ]);
+
+    // STORE
+    $routes->post('usuarios/store', 'UsersController::store', [
+        'filter' => 'permission:users.manage'
+    ]);
+
+    // EDIT
+    $routes->get('usuarios/edit/(:num)', 'UsersController::edit/$1', [
+        'filter' => 'permission:users.manage'
+    ]);
+
+    // UPDATE
+    $routes->post('usuarios/update/(:num)', 'UsersController::update/$1', [
+        'filter' => 'permission:users.manage'
+    ]);
+
+    // DELETE
+    $routes->get('usuarios/delete/(:num)', 'UsersController::delete/$1', [
+        'filter' => 'permission:users.manage'
+    ]);
 
 });

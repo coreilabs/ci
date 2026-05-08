@@ -1,5 +1,187 @@
 .galada-regular {
-  font-family: "Galada", cursive;
-  font-weight: 400;
-  font-style: normal;
+
+    font-family: "Galada", cursive;
+
+    font-weight: 400;
+
+    font-style: normal;
+
 }
+
+/* AUTOFILL DARK MODE */
+
+.dark-mode input:-webkit-autofill,
+.dark-mode input:-webkit-autofill:hover,
+.dark-mode input:-webkit-autofill:focus,
+.dark-mode textarea:-webkit-autofill,
+.dark-mode select:-webkit-autofill {
+
+    -webkit-text-fill-color: #fff !important;
+
+    caret-color: #fff !important;
+
+    -webkit-box-shadow: 0 0 0px 1000px #343a40 inset !important;
+
+    box-shadow: 0 0 0px 1000px #343a40 inset !important;
+
+    transition: background-color 9999s ease-in-out 0s;
+
+}
+
+/* DATATABLES */
+
+table.dataTable {
+
+    width: 100% !important;
+
+}
+
+.dataTables_wrapper {
+
+    width: 100%;
+
+}
+
+table.dataTable.dtr-inline.collapsed tbody td.dtr-control:before {
+
+    margin-top: -10px;
+
+}
+
+/* =========================
+   DATATABLES UX
+========================= */
+
+.dataTables_length,
+.dataTables_filter {
+
+    margin-bottom: 10px;
+
+}
+
+/* LABELS */
+
+.dataTables_length label,
+.dataTables_filter label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 0;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+}
+
+/* SELECT */
+
+.dataTables_length select {
+
+    width: auto !important;
+
+    min-width: 70px !important;
+
+    max-width: 90px !important;
+
+    height: 38px !important;
+
+    padding: 6px 30px 6px 10px !important;
+
+    border-radius: 8px !important;
+
+    font-size: 14px !important;
+
+}
+
+/* SEARCH INPUT */
+
+.dataTables_filter input {
+
+    width: 220px !important;
+
+    max-width: 220px !important;
+
+    height: 38px !important;
+
+    border-radius: 8px !important;
+
+    margin-left: 0 !important;
+
+    padding: 6px 10px !important;
+
+}
+
+/* DESKTOP ALIGN */
+
+.dataTables_wrapper .row:first-child {
+
+    align-items: center;
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .dataTables_wrapper .row:first-child {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+    .dataTables_length,
+    .dataTables_filter {
+
+        width: 100% !important;
+
+        text-align: left !important;
+
+    }
+
+    .dataTables_length label,
+    .dataTables_filter label {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 6px;
+
+        font-size: 13px;
+
+        width: 100%;
+
+    }
+
+    .dataTables_length select {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+    }
+
+    .dataTables_filter input {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+    }
+
+}
+
+/* FIM DATATABLES */

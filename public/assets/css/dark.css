@@ -1,0 +1,598 @@
+/* =========================================================
+   ADMINLTE 3.2 - DARK MODE OVERRIDE
+   PALETA BASEADA EM: #01aaaf
+   Compatível com body.dark-mode
+========================================================= */
+
+/* =========================================================
+   PALETA
+========================================================= */
+
+/*
+PRIMARY............. #01aaaf
+PRIMARY HOVER....... #01959a
+PRIMARY LIGHT....... #35c7cb
+PRIMARY SOFT........ rgba(1,170,175,.12)
+
+BACKGROUND.......... #12181d
+SURFACE............. #1b232b
+SURFACE LIGHT....... #232d36
+BORDER.............. #2f3b46
+
+TEXT PRIMARY........ #d7f7f8
+TEXT SECONDARY...... #8fb9bb
+TEXT MUTED.......... #6f8f91
+*/
+
+/* =========================================================
+   BODY / LAYOUT
+========================================================= */
+
+.dark-mode {
+
+    background-color: #12181d !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .wrapper,
+.dark-mode .content-wrapper {
+
+    background-color: #12181d !important;
+
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.dark-mode .main-header,
+.dark-mode .navbar {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .navbar-nav .nav-link {
+
+    color: #01aaaf !important;
+
+}
+
+.dark-mode .navbar-nav .nav-link:hover,
+.dark-mode .navbar-nav .nav-link:focus {
+
+    color: #35c7cb !important;
+
+}
+
+.dark-mode .navbar-nav .nav-link.active {
+
+    color: #01aaaf !important;
+
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.dark-mode .main-sidebar {
+
+    background-color: #182028 !important;
+
+}
+
+.dark-mode .brand-link {
+
+    background-color: #182028 !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .brand-link:hover {
+
+    color: #35c7cb !important;
+
+}
+
+/* SIDEBAR LINKS */
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link i {
+
+    color: #01aaaf !important;
+
+}
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link:hover {
+
+    background-color: rgba(1,170,175,.10) !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link:hover i {
+
+    color: #35c7cb !important;
+
+}
+
+/* ACTIVE */
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link.active {
+
+    background-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+.dark-mode .nav-sidebar > .nav-item > .nav-link.active i {
+
+    color: #ffffff !important;
+
+}
+
+/* SUBMENU */
+
+.dark-mode .nav-treeview > .nav-item > .nav-link {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .nav-treeview > .nav-item > .nav-link:hover {
+
+    background-color: rgba(1,170,175,.08) !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.dark-mode .card {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .card-header {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .card-footer {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .card-title {
+
+    color: #d7f7f8 !important;
+
+}
+
+/* CARD PRIMARY */
+
+.dark-mode .card-primary.card-outline {
+
+    border-top: 3px solid #01aaaf !important;
+
+}
+
+.dark-mode .card-primary:not(.card-outline) > .card-header {
+
+    background-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+/* =========================================================
+   TEXTOS
+========================================================= */
+
+.dark-mode p,
+.dark-mode span,
+.dark-mode label,
+.dark-mode small,
+.dark-mode strong,
+.dark-mode .text-muted {
+
+    color: #01aaaf!important;
+
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.dark-mode a {
+
+    color: #35c7cb !important;
+
+}
+
+.dark-mode a:hover {
+
+    color: #67e4e7 !important;
+
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.dark-mode .btn-primary {
+
+    background-color: #01aaaf !important;
+
+    border-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-primary:focus {
+
+    background-color: #01959a !important;
+
+    border-color: #01959a !important;
+
+}
+
+.dark-mode .btn-outline-primary {
+
+    color: #01aaaf !important;
+
+    border-color: #01aaaf !important;
+
+}
+
+.dark-mode .btn-outline-primary:hover {
+
+    background-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.dark-mode .form-control {
+
+    background-color: #232d36 !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .form-control::placeholder {
+
+    color: #6f8f91 !important;
+
+}
+
+.dark-mode .form-control:focus {
+
+    background-color: #232d36 !important;
+
+    border-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+    box-shadow: 0 0 0 .2rem rgba(1,170,175,.22) !important;
+
+}
+
+/* INPUT GROUP */
+
+.dark-mode .input-group-text {
+
+    background-color: #232d36 !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #01aaaf!important;
+
+}
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.dark-mode .table {
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .table-bordered td,
+.dark-mode .table-bordered th {
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .table-hover tbody tr:hover {
+
+    background-color: rgba(1,170,175,.06) !important;
+
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+
+    background-color: rgba(255,255,255,.015) !important;
+
+}
+
+/* =========================================================
+   DATATABLES
+========================================================= */
+
+.dark-mode .dataTables_wrapper {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .dataTables_wrapper .dataTables_info,
+.dark-mode .dataTables_wrapper .dataTables_filter,
+.dark-mode .dataTables_wrapper .dataTables_length,
+.dark-mode .dataTables_wrapper .dataTables_paginate {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .dataTables_wrapper input,
+.dark-mode .dataTables_wrapper select {
+
+    background-color: #232d36 !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+/* PAGINATION */
+
+.dark-mode .page-link {
+
+    background-color: #232d36 !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #35c7cb !important;
+
+}
+
+.dark-mode .page-link:hover {
+
+    background-color: rgba(1,170,175,.12) !important;
+
+    color: #ffffff !important;
+
+}
+
+.dark-mode .page-item.active .page-link {
+
+    background-color: #01aaaf !important;
+
+    border-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.dark-mode .dropdown-menu {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .dropdown-item {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .dropdown-item:hover {
+
+    background-color: rgba(1,170,175,.10) !important;
+
+    color: #ffffff !important;
+
+}
+
+.dark-mode .dropdown-item.active {
+
+    background-color: #01aaaf !important;
+
+    color: #ffffff !important;
+
+}
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.dark-mode .modal-content {
+
+    background-color: #1b232b !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+
+    border-color: #2f3b46 !important;
+
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.dark-mode .alert-success {
+
+    background-color: rgba(25,135,84,.15) !important;
+
+    border-color: rgba(25,135,84,.30) !important;
+
+    color: #8fd8b3 !important;
+
+}
+
+.dark-mode .alert-danger {
+
+    background-color: rgba(220,53,69,.15) !important;
+
+    border-color: rgba(220,53,69,.30) !important;
+
+    color: #f1b0b7 !important;
+
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.dark-mode .nav-tabs {
+
+    border-color: #2f3b46 !important;
+
+}
+
+.dark-mode .nav-tabs .nav-link {
+
+    color: #01aaaf!important;
+
+}
+
+.dark-mode .nav-tabs .nav-link.active {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 #2f3b46 #1b232b !important;
+
+    color: #35c7cb !important;
+
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.dark-mode .main-footer {
+
+    background-color: #1b232b !important;
+
+    border-color: #2f3b46 !important;
+
+    color: #01aaaf!important;
+
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.dark-mode.login-page {
+
+    background-color: #12181d !important;
+
+}
+
+.dark-mode .login-card-body {
+
+    background-color: #1b232b !important;
+
+    color: #d7f7f8 !important;
+
+}
+
+.dark-mode .login-box-msg {
+
+    color: #01aaaf!important;
+
+}
+
+/* =========================================================
+   AUTOFILL
+========================================================= */
+
+.dark-mode input:-webkit-autofill,
+.dark-mode input:-webkit-autofill:hover,
+.dark-mode input:-webkit-autofill:focus {
+
+    -webkit-text-fill-color: #d7f7f8 !important;
+
+    caret-color: #d7f7f8 !important;
+
+    -webkit-box-shadow: 0 0 0px 1000px #232d36 inset !important;
+
+    box-shadow: 0 0 0px 1000px #232d36 inset !important;
+
+    transition: background-color 9999s ease-in-out 0s;
+
+}
+
+
+
+
+.expand-row-icon {
+
+    color: #01aaaf !important;
+
+}
+
+.expand-row-icon.fa-minus {
+
+    color: #dc3545 !important;
+
+}
+
+.dark-mode p {
+    
+    color: white !important;
+}

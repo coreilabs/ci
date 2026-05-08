@@ -19,6 +19,8 @@ class ContentSecurityPolicy extends BaseConfig
     // Broadbrush CSP management
     // -------------------------------------------------------------------------
 
+
+    
     /**
      * Default CSP report context
      */

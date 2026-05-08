@@ -13,17 +13,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+
+    <!-- CSS PERSONALIZADO -->
+    <link rel="stylesheet"
+          href="<?= base_url('assets/css/style.css') ?>">
+
+
 
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page ">
 
 <div class="login-box">
 
     <!-- LOGO / HEADER -->
     <div class="login-logo galada-regular text-2xl">
-        <b>Amor</b> Fraterno
+        <img src="<?php echo base_url('assets/img/logo.png')?>" class="img-fluid mx-auto d-block" alt="">
     </div>
 
     <!-- CARD -->
