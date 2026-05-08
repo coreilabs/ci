@@ -81,43 +81,53 @@
 
     }
 
-        /* ÍCONE CUSTOM */
+    /* COLUNA DO + */
 
-    #tabelaUsuarios tbody td:first-child {
+    #tabelaUsuarios tbody > tr:not(.child) > td:first-child {
 
-    width: 40px !important;
+        width: 40px !important;
 
-    min-width: 40px !important;
+        min-width: 40px !important;
 
-    max-width: 40px !important;
+        max-width: 40px !important;
 
-    padding: 0 !important;
+        padding: 0 !important;
 
-    text-align: center !important;
+        text-align: center !important;
 
-    vertical-align: middle !important;
+        vertical-align: middle !important;
 
-}
+    }
 
+    /* BOTÃO EXPANDIR */
 
+    .expand-row {
 
+        width: 100%;
 
+        min-height: 40px;
 
-.expand-row {
+        display: flex !important;
 
-    width: 100%;
+        align-items: center;
 
-    min-height: 40px;
+        justify-content: center;
 
-    display: flex !important;
+        cursor: pointer;
 
-    align-items: center;
+    }
 
-    justify-content: center;
+    /* ÍCONE */
 
-    cursor: pointer;
+    .expand-row-icon {
 
-}
+        color: #01aaaf !important;
+
+        font-size: 15px;
+
+        transition: .2s ease;
+
+    }
 
     .expand-row-icon.fa-minus {
 
@@ -125,29 +135,71 @@
 
     }
 
-    /* CHILD TABLE */
+    /* CHILD ROW */
+
+    tr.child {
+
+        background: transparent !important;
+
+    }
 
     .child-table {
 
-        width: 100%;
+        width: 100% !important;
 
-        margin: 0;
+        table-layout: auto !important;
+
+        border-collapse: collapse;
+
+    }
+
+    .child-table tr {
+
+        border-bottom: 1px solid rgba(255,255,255,.05);
 
     }
 
     .child-table td {
 
-        padding: .35rem;
+        padding: 8px 10px !important;
 
-        border: 0;
+        border: 0 !important;
+
+        vertical-align: top;
+
+        white-space: normal !important;
+
+        word-break: normal !important;
+
+        overflow-wrap: break-word !important;
 
     }
 
+    /* LABEL */
+
     .child-label {
 
-        font-weight: bold;
+        width: 1% !important;
 
-        width: 80px;
+        white-space: nowrap !important;
+
+        font-weight: 700;
+
+        padding-right: 12px !important;
+
+    }
+
+    .child-table tr td:first-child {
+
+        width: 1% !important;
+
+        white-space: nowrap !important;
+
+    }
+
+    .child-table tr td:last-child {
+
+        width: auto !important;
 
     }
 
@@ -160,7 +212,9 @@
 
             white-space: normal !important;
 
-            word-break: break-word;
+            word-break: normal !important;
+
+            overflow-wrap: break-word !important;
 
         }
 
@@ -170,6 +224,12 @@
             padding: .20rem .35rem;
 
             font-size: .70rem;
+
+        }
+
+        .child-table td {
+
+            font-size: 14px;
 
         }
 
@@ -285,7 +345,7 @@ $(function () {
 
         var row = table.row(tr);
 
-        var icon = $(this);
+        var icon = $(this).find('i');
 
         var data = row.data();
 
@@ -300,29 +360,23 @@ $(function () {
 
         } else {
 
-            row.child(
+           row.child(
 
-                '<table class="child-table">'+
+    '<div class="child-wrapper">'+
 
-                    '<tr>'+
+        '<div class="child-item">'+
+            '<span class="child-label">Email:</span>'+
+            '<span class="child-value">'+data[2]+'</span>'+
+        '</div>'+
 
-                        '<td class="child-label">Email:</td>'+
+        '<div class="child-item">'+
+            '<span class="child-label">Cargo:</span>'+
+            '<span class="child-value">'+data[3]+'</span>'+
+        '</div>'+
 
-                        '<td>'+data[2]+'</td>'+
+    '</div>'
 
-                    '</tr>'+
-
-                    '<tr>'+
-
-                        '<td class="child-label">Cargo:</td>'+
-
-                        '<td>'+data[3]+'</td>'+
-
-                    '</tr>'+
-
-                '</table>'
-
-            ).show();
+).show();
 
             tr.addClass('shown');
 

@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="hold-transition login-page ">
+<body class="hold-transition login-page " style="background-color: white;">
 
 <div class="login-box">
 

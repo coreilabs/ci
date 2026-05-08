@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1778260372;_ci_previous_url|s:23:"http://ci.test/usuarios";user|a:5:{s:2:"id";s:1:"1";s:4:"name";s:5:"admin";s:5:"email";s:15:"admin@email.com";s:4:"role";s:5:"admin";s:11:"permissions";a:3:{i:0;s:14:"dashboard.view";i:1;s:12:"users.manage";i:2;s:10:"users.view";}}
