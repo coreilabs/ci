@@ -11,7 +11,8 @@ class TreatmentModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = [
         'patient_id', 'guardian_id', 'admission_date', 'monthly_amount',
-        'registration_amount', 'captor_name', 'status', 'notes',
+        'registration_amount', 'stay_months', 'billing_day', 'captor_name',
+        'status', 'notes',
     ];
 
     public function listWithPeople()

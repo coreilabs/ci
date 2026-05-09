@@ -100,6 +100,16 @@ $current = $payload[$step] ?? [];
                         <input name="captor_name" class="form-control" value="<?= esc($current['captor_name'] ?? '') ?>">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Permanencia em meses</label>
+                        <input type="number" min="1" name="stay_months" class="form-control" required value="<?= esc($current['stay_months'] ?? 6) ?>">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Dia da cobranca</label>
+                        <input type="number" min="1" max="28" name="billing_day" class="form-control" required value="<?= esc($current['billing_day'] ?? 10) ?>">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Observacoes</label>
                     <textarea name="notes" class="form-control" rows="4"><?= esc($current['notes'] ?? '') ?></textarea>

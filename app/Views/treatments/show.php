@@ -20,6 +20,13 @@
             <div class="col-md-3"><b>Status:</b> <?= esc($treatment['status']) ?></div>
             <div class="col-md-3"><b>Mensalidade:</b> R$ <?= number_format((float) $treatment['monthly_amount'], 2, ',', '.') ?></div>
         </div>
+        <form class="form-inline mt-3" method="post" action="<?= base_url('tratamentos/' . $treatment['id'] . '/dia-cobranca') ?>">
+            <?= csrf_field() ?>
+            <label class="mr-2">Dia da cobranca</label>
+            <input type="number" min="1" max="28" name="billing_day" class="form-control form-control-sm mr-2" value="<?= esc($treatment['billing_day'] ?? 10) ?>">
+            <button class="btn btn-primary btn-sm">Atualizar mensalidades futuras</button>
+            <span class="text-muted ml-2">Permanencia: <?= esc($treatment['stay_months'] ?? 1) ?> mes(es)</span>
+        </form>
     </div>
 </div>
 

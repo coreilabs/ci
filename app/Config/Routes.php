@@ -98,6 +98,9 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     $routes->get('tratamentos/(:num)', 'TreatmentsController::show/$1', [
         'filter' => 'permission:treatments.view,dashboard.view'
     ]);
+    $routes->post('tratamentos/(:num)/dia-cobranca', 'TreatmentsController::updateBillingDay/$1', [
+        'filter' => 'csrf'
+    ]);
     $routes->get('tratamentos/(:num)/prontuario/novo', 'RecordsController::create/$1', [
         'filter' => 'permission:records.manage,dashboard.view'
     ]);
@@ -131,6 +134,12 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         'filter' => 'csrf'
     ]);
     $routes->post('agenda/eventos/(:num)/mover', 'CalendarController::move/$1', [
+        'filter' => 'csrf'
+    ]);
+    $routes->post('agenda/eventos/(:num)/pagar', 'CalendarController::payFinancialEvent/$1', [
+        'filter' => 'csrf'
+    ]);
+    $routes->post('agenda/eventos/(:num)/reagendar', 'CalendarController::rescheduleFinancialEvent/$1', [
         'filter' => 'csrf'
     ]);
 

@@ -47,7 +47,7 @@ class FinanceController extends BaseController
                 'type' => 'mensalidade',
                 'description' => 'Mensalidade',
                 'amount' => $treatment['monthly_amount'],
-                'due_date' => $competence . '-10',
+                'due_date' => $this->dueDateForCompetence($competence, (int) ($treatment['billing_day'] ?? 10)),
                 'status' => 'open',
             ]);
 
@@ -57,13 +57,22 @@ class FinanceController extends BaseController
                 'source_id' => $id,
                 'title' => 'Vencimento mensalidade',
                 'category' => 'financeiro',
-                'starts_at' => $competence . '-10 09:00:00',
+                'starts_at' => $this->dueDateForCompetence($competence, (int) ($treatment['billing_day'] ?? 10)) . ' 09:00:00',
             ]);
 
             $created++;
         }
 
         return redirect()->to('financeiro')->with('success', $created . ' mensalidade(s) gerada(s).');
+    }
+
+    private function dueDateForCompetence(string $competence, int $billingDay): string
+    {
+        $billingDay = min(28, max(1, $billingDay));
+        $lastDay = (int) date('t', strtotime($competence . '-01'));
+        $day = min($billingDay, $lastDay);
+
+        return $competence . '-' . str_pad((string) $day, 2, '0', STR_PAD_LEFT);
     }
 
     public function pay(int $id)

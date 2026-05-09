@@ -89,6 +89,8 @@ class AdmissionController extends BaseController
         if ($step === 'financeiro') {
             $post['registration_amount'] = money_to_float($post['registration_amount'] ?? '0');
             $post['monthly_amount'] = money_to_float($post['monthly_amount'] ?? '0');
+            $post['stay_months'] = max(1, (int) ($post['stay_months'] ?? 1));
+            $post['billing_day'] = min(28, max(1, (int) ($post['billing_day'] ?? 10)));
         }
 
         $payload[$step] = $post;
@@ -144,6 +146,8 @@ class AdmissionController extends BaseController
             'admission_date' => $finance['admission_date'] ?: date('Y-m-d'),
             'monthly_amount' => $finance['monthly_amount'],
             'registration_amount' => $finance['registration_amount'],
+            'stay_months' => $finance['stay_months'],
+            'billing_day' => $finance['billing_day'],
             'captor_name' => $finance['captor_name'] ?: null,
             'status' => 'active',
             'notes' => $finance['notes'] ?? null,
@@ -189,19 +193,46 @@ class AdmissionController extends BaseController
             ]);
         }
 
-        $monthlyStart = empty($finance['captor_name']) ? $admissionDate : date('Y-m-01', strtotime($admissionDate . ' +1 month'));
+        $firstMonthlyMonth = empty($finance['captor_name'])
+            ? date('Y-m-01', strtotime($admissionDate))
+            : date('Y-m-01', strtotime($admissionDate . ' +1 month'));
+
+        $billingDay = min(28, max(1, (int) ($finance['billing_day'] ?? 10)));
+        $stayMonths = max(1, (int) ($finance['stay_months'] ?? 1));
 
         if ((float) $finance['monthly_amount'] > 0) {
-            $model->insert([
-                'treatment_id' => $treatmentId,
-                'competence' => date('Y-m', strtotime($monthlyStart)),
-                'type' => 'mensalidade',
-                'description' => 'Mensalidade',
-                'amount' => $finance['monthly_amount'],
-                'due_date' => $monthlyStart,
-                'status' => 'open',
-            ]);
+            for ($i = 0; $i < $stayMonths; $i++) {
+                $month = date('Y-m-01', strtotime($firstMonthlyMonth . ' +' . $i . ' month'));
+                $dueDate = $this->dueDateForMonth($month, $billingDay);
+                $entryId = $model->insert([
+                    'treatment_id' => $treatmentId,
+                    'competence' => date('Y-m', strtotime($month)),
+                    'type' => 'mensalidade',
+                    'description' => 'Mensalidade ' . ($i + 1) . '/' . $stayMonths,
+                    'amount' => $finance['monthly_amount'],
+                    'due_date' => $dueDate,
+                    'status' => 'open',
+                ]);
+
+                (new CalendarEventModel())->insert([
+                    'treatment_id' => $treatmentId,
+                    'source_type' => 'finance',
+                    'source_id' => $entryId,
+                    'title' => 'Receber mensalidade',
+                    'category' => 'financeiro',
+                    'starts_at' => $dueDate . ' 09:00:00',
+                    'notes' => 'Mensalidade ' . ($i + 1) . '/' . $stayMonths,
+                ]);
+            }
         }
+    }
+
+    private function dueDateForMonth(string $month, int $billingDay): string
+    {
+        $lastDay = (int) date('t', strtotime($month));
+        $day = min($billingDay, $lastDay);
+
+        return date('Y-m-', strtotime($month)) . str_pad((string) $day, 2, '0', STR_PAD_LEFT);
     }
 
     private function createRequiredDocuments(int $treatmentId, array $payload): void
@@ -240,6 +271,8 @@ class AdmissionController extends BaseController
             'responsavel' => $payload['responsavel']['name'] ?? '',
             'admissao' => $finance['admission_date'] ?? date('Y-m-d'),
             'mensalidade' => 'R$ ' . number_format((float) ($finance['monthly_amount'] ?? 0), 2, ',', '.'),
+            'permanencia_meses' => $finance['stay_months'] ?? 1,
+            'dia_cobranca' => $finance['billing_day'] ?? 10,
         ];
     }
 
