@@ -73,4 +73,88 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         'filter' => 'permission:users.manage'
     ]);
 
+    /*
+    |--------------------------------------------------------------------------
+    | MINI HIS / ERP CLINICO
+    |--------------------------------------------------------------------------
+    */
+
+    $routes->get('admissoes', 'AdmissionController::index', [
+        'filter' => 'permission:admissions.manage,dashboard.view'
+    ]);
+    $routes->get('admissoes/iniciar', 'AdmissionController::start', [
+        'filter' => 'permission:admissions.manage,dashboard.view'
+    ]);
+    $routes->get('admissoes/(:num)/(:segment)', 'AdmissionController::step/$1/$2', [
+        'filter' => 'permission:admissions.manage,dashboard.view'
+    ]);
+    $routes->post('admissoes/(:num)/(:segment)', 'AdmissionController::save/$1/$2', [
+        'filter' => 'csrf'
+    ]);
+
+    $routes->get('tratamentos', 'TreatmentsController::index', [
+        'filter' => 'permission:treatments.view,dashboard.view'
+    ]);
+    $routes->get('tratamentos/(:num)', 'TreatmentsController::show/$1', [
+        'filter' => 'permission:treatments.view,dashboard.view'
+    ]);
+    $routes->get('tratamentos/(:num)/prontuario/novo', 'RecordsController::create/$1', [
+        'filter' => 'permission:records.manage,dashboard.view'
+    ]);
+    $routes->post('tratamentos/(:num)/prontuario', 'RecordsController::store/$1', [
+        'filter' => 'csrf'
+    ]);
+    $routes->get('tratamentos/(:num)/alta', 'DischargesController::create/$1', [
+        'filter' => 'permission:treatments.view,dashboard.view'
+    ]);
+    $routes->post('tratamentos/(:num)/alta', 'DischargesController::store/$1', [
+        'filter' => 'csrf'
+    ]);
+
+    $routes->get('financeiro', 'FinanceController::index', [
+        'filter' => 'permission:finance.manage,dashboard.view'
+    ]);
+    $routes->post('financeiro/gerar-mensalidades', 'FinanceController::generateMonthly', [
+        'filter' => 'csrf'
+    ]);
+    $routes->get('financeiro/(:num)/pagar', 'FinanceController::pay/$1', [
+        'filter' => 'permission:finance.manage,dashboard.view'
+    ]);
+
+    $routes->get('agenda', 'CalendarController::index', [
+        'filter' => 'permission:calendar.manage,dashboard.view'
+    ]);
+    $routes->get('agenda/eventos', 'CalendarController::events', [
+        'filter' => 'permission:calendar.manage,dashboard.view'
+    ]);
+    $routes->post('agenda', 'CalendarController::store', [
+        'filter' => 'csrf'
+    ]);
+    $routes->post('agenda/eventos/(:num)/mover', 'CalendarController::move/$1', [
+        'filter' => 'csrf'
+    ]);
+
+    $routes->get('documentos/(:num)/pdf', 'DocumentsController::pdf/$1', [
+        'filter' => 'permission:documents.manage,dashboard.view'
+    ]);
+    $routes->post('documentos/(:num)/assinado', 'DocumentsController::uploadSigned/$1', [
+        'filter' => 'csrf'
+    ]);
+    $routes->get('contratos/(:num)/pdf', 'ContractsController::pdf/$1', [
+        'filter' => 'permission:documents.manage,dashboard.view'
+    ]);
+
+    $routes->get('administrativo-clinico', 'AdminClinicalController::index', [
+        'filter' => 'permission:clinical_admin.manage,dashboard.view'
+    ]);
+    $routes->post('administrativo-clinico/registros', 'AdminClinicalController::storeRecord', [
+        'filter' => 'csrf'
+    ]);
+    $routes->get('administrativo-clinico/modelos/(:num)', 'AdminClinicalController::editTemplate/$1', [
+        'filter' => 'permission:clinical_admin.manage,dashboard.view'
+    ]);
+    $routes->post('administrativo-clinico/modelos/(:num)', 'AdminClinicalController::updateTemplate/$1', [
+        'filter' => 'csrf'
+    ]);
+
 });

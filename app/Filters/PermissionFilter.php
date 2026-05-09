@@ -18,10 +18,12 @@ class PermissionFilter implements FilterInterface
 
     if ($arguments) {
         foreach ($arguments as $perm) {
-            if (!hasPermission($perm)) {
-                return redirect()->to('/dashboard');
+            if (hasPermission($perm)) {
+                return;
             }
         }
+
+        return redirect()->to('/painel');
     }
 }
 
