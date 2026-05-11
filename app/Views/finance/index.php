@@ -17,7 +17,7 @@
                 <?php foreach ($entries as $entry): ?>
                     <tr>
                         <td><?= esc($entry['patient_name']) ?></td>
-                        <td><?= esc($entry['competence']) ?></td>
+                        <td><?= esc(human_month($entry['competence'])) ?></td>
                         <td><?= esc($entry['description']) ?></td>
                         <td>R$ <?= number_format((float) $entry['amount'], 2, ',', '.') ?></td>
                         <td><?= esc($entry['status']) ?></td>

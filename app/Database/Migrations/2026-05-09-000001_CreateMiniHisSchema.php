@@ -217,6 +217,7 @@ class CreateMiniHisSchema extends Migration
         $this->forge->addField([
             'id' => ['type' => 'INT', 'unsigned' => true, 'auto_increment' => true],
             'treatment_id' => ['type' => 'INT', 'unsigned' => true, 'null' => true],
+            'professional_user_id' => ['type' => 'INT', 'unsigned' => true, 'null' => true],
             'source_type' => ['type' => 'VARCHAR', 'constraint' => 40, 'default' => 'manual'],
             'source_id' => ['type' => 'INT', 'unsigned' => true, 'null' => true],
             'title' => ['type' => 'VARCHAR', 'constraint' => 180],

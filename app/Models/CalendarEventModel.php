@@ -10,7 +10,7 @@ class CalendarEventModel extends Model
     protected $returnType = 'array';
     protected $useTimestamps = true;
     protected $allowedFields = [
-        'treatment_id', 'source_type', 'source_id', 'title', 'category',
+        'treatment_id', 'professional_user_id', 'source_type', 'source_id', 'title', 'category',
         'starts_at', 'ends_at', 'notes',
     ];
 }

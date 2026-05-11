@@ -5,6 +5,27 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
 
+<div class="card card-outline card-info">
+    <div class="card-header"><h3 class="card-title">Atendimentos psicológicos da semana</h3></div>
+    <div class="card-body p-0">
+        <table class="table table-sm mb-0">
+            <thead><tr><th>Paciente</th><th>Psicólogo</th><th>Data</th></tr></thead>
+            <tbody>
+                <?php foreach ($weeklyPsychologicalEvents as $event): ?>
+                    <tr>
+                        <td><?= esc($event['patient_name'] ?? 'Paciente') ?></td>
+                        <td><?= esc($event['professional_name'] ?? 'Não informado') ?></td>
+                        <td><?= esc(human_datetime($event['starts_at'])) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php if (empty($weeklyPsychologicalEvents)): ?>
+                    <tr><td colspan="3" class="text-muted text-center">Nenhum atendimento psicológico agendado para esta semana.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-4">
         <div class="card card-outline card-primary">
@@ -34,6 +55,15 @@
                             <option value="enfermagem">Enfermagem</option>
                             <option value="financeiro">Financeiro</option>
                             <option value="administrativo">Administrativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Profissional</label>
+                        <select name="professional_user_id" class="form-control">
+                            <option value="">Não informado</option>
+                            <?php foreach ($professionals as $professional): ?>
+                                <option value="<?= $professional['id'] ?>"><?= esc($professional['name']) ?><?= $professional['role_name'] ? ' - ' . esc($professional['role_name']) : '' ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -130,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#billing_patient').text(props.patient_name || 'Paciente');
         $('#billing_amount').text(formatMoney(props.amount || 0));
         $('#billing_status').text(props.financial_status === 'paid' ? 'Pago' : 'Aberto');
-        $('#billing_due').text(props.due_date || '');
+        $('#billing_due').text(props.formatted_due_date || '');
         $('#billing_new_due_date').val(props.due_date || '');
         $('#markPaidBtn').prop('disabled', props.financial_status === 'paid');
         $('#billingModal').modal('show');

@@ -1,0 +1,51 @@
+CRITICAL - 2026-05-11 15:35:45 --> TypeError: CodeIgniter\CLI\InputOutput::input(): Return value must be of type string, false returned
+[Method: CLI, Route: migrate:refresh]
+in SYSTEMPATH\CLI\InputOutput.php on line 46.
+ 1 SYSTEMPATH\CLI\CLI.php(260): CodeIgniter\CLI\InputOutput->input()
+ 2 SYSTEMPATH\Commands\Database\MigrateRefresh.php(81): CodeIgniter\CLI\CLI::prompt('Are you sure you want to refresh?', [...])
+ 3 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+ 4 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [])
+ 5 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+ 6 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+ 7 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-11 15:35:58 --> Unknown column 'professional_user_id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `calendar_events` (`treatment_id`, `professional_user_id`, `source_type`, `title`, `category`, `starts_at`, `notes`, `created_at`, `updated_at`) VALUES (1, \'2\', \'psychology_assignment\', \'Atendimento psicológico\', \'psicologico\', \'2026-05-12 10:00:00\', \'Atendimento semanal definido pela divisão de pacientes.\', \'2026-05-11 15:35:57\', \'2026-05-11 15:35:57\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `calendar_events` (`treatment_id`, `professional_user_id`, `source_type`, `title`, `category`, `starts_at`, `notes`, `created_at`, `updated_at`) VALUES (1, \'2\', \'psychology_assignment\', \'Atendimento psicológico\', \'psicologico\', \'2026-05-12 10:00:00\', \'Atendimento semanal definido pela divisão de pacientes.\', \'2026-05-11 15:35:57\', \'2026-05-11 15:35:57\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `calendar_events` (`treatment_id`, `professional_user_id`, `source_type`, `title`, `category`, `starts_at`, `notes`, `created_at`, `updated_at`) VALUES (1, \'2\', \'psychology_assignment\', \'Atendimento psicológico\', \'psicologico\', \'2026-05-12 10:00:00\', \'Atendimento semanal definido pela divisão de pacientes.\', \'2026-05-11 15:35:57\', \'2026-05-11 15:35:57\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `calendar_events` (`treatment_id`, `professional_user_id`, `source_type`, `title`, `category`, `starts_at`, `notes`, `created_at`, `updated_at`) VALUES (:treatment_id:, :professional_user_id:, :source_type:, :title:, :category:, :starts_at:, :notes:, :created_at:, :updated_at:)', [...], false)
+ 5 APPPATH\Database\Seeds\ClinicalDemoSeeder.php(238): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Database\Seeds\ClinicalDemoSeeder.php(22): App\Database\Seeds\ClinicalDemoSeeder->seedClinicalData([...])
+ 7 SYSTEMPATH\Database\Seeder.php(155): App\Database\Seeds\ClinicalDemoSeeder->run()
+ 8 SYSTEMPATH\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Seeds\\ClinicalDemoSeeder')
+ 9 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Seed->run([])
+10 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', [...])
+11 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+12 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+13 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-11 15:36:23 --> Duplicate column name 'professional_user_id'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('ALTER TABLE `calendar_events`
+	ADD `professional_user_id` INT UNSIGNED NULL AFTER `treatment_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('ALTER TABLE `calendar_events`
+	ADD `professional_user_id` INT UNSIGNED NULL AFTER `treatment_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('ALTER TABLE `calendar_events`
+	ADD `professional_user_id` INT UNSIGNED NULL AFTER `treatment_id`')
+ 4 SYSTEMPATH\Database\Forge.php(772): CodeIgniter\Database\BaseConnection->query('ALTER TABLE `calendar_events`
+	ADD `professional_user_id` INT UNSIGNED NULL AFTER `treatment_id`')
+ 5 APPPATH\Database\Migrations\2026-05-11-000001_AddTreatmentProfessionalAssignments.php(27): CodeIgniter\Database\Forge->addColumn('calendar_events', [...])
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\AddTreatmentProfessionalAssignments->up()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([...])
+12 SYSTEMPATH\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', [...])
+13 SYSTEMPATH\Commands\Database\MigrateRefresh.php(91): CodeIgniter\CLI\BaseCommand->call('migrate', [...])
+14 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\MigrateRefresh->CodeIgniter\Commands\Database\{closure}()
+15 SYSTEMPATH\Commands\Database\MigrateRefresh.php(89): CodeIgniter\Commands\Database\MigrateRefresh->withSignalsBlocked(Object(Closure))
+16 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run([...])
+17 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', [...])
+18 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+19 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+20 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))

@@ -3,6 +3,13 @@
 
 <?= $this->include('partials/alerts') ?>
 
+<?php
+$statusLabels = [
+    'active' => 'Ativo',
+    'discharged' => 'Alta',
+];
+?>
+
 <div class="card card-outline card-primary">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title">Tratamentos</h3>
@@ -22,12 +29,13 @@
             </thead>
             <tbody>
                 <?php foreach ($treatments as $treatment): ?>
+                    <?php $statusLabel = $statusLabels[$treatment['status']] ?? $treatment['status']; ?>
                     <tr>
                         <td><i class="fas fa-plus expand-row"></i></td>
                         <td><?= esc($treatment['patient_name']) ?></td>
                         <td><?= esc($treatment['guardian_name']) ?></td>
-                        <td><?= esc($treatment['admission_date']) ?></td>
-                        <td><?= esc($treatment['status']) ?></td>
+                        <td><?= esc(human_date($treatment['admission_date'])) ?></td>
+                        <td><?= esc($statusLabel) ?></td>
                         <td><a href="<?= base_url('tratamentos/' . $treatment['id']) ?>" class="btn btn-info btn-sm">Abrir</a></td>
                     </tr>
                 <?php endforeach; ?>

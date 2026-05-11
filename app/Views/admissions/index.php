@@ -25,7 +25,7 @@
                     <tr>
                         <td><?= esc($draft['id']) ?></td>
                         <td><?= esc($draft['step']) ?></td>
-                        <td><?= esc($draft['updated_at']) ?></td>
+                        <td><?= esc(human_datetime($draft['updated_at'])) ?></td>
                         <td><a class="btn btn-info btn-sm" href="<?= base_url('admissoes/' . $draft['id'] . '/' . $draft['step']) ?>">Continuar</a></td>
                     </tr>
                 <?php endforeach; ?>

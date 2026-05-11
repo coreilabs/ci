@@ -39,6 +39,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="<?= base_url('divisao-pacientes') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-user-md"></i>
+                        <p>Divisão de pacientes</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="<?= base_url('financeiro') ?>" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>Financeiro</p>

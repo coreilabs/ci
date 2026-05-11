@@ -185,3 +185,50 @@ table.dataTable.dtr-inline.collapsed tbody td.dtr-control:before {
 }
 
 /* FIM DATATABLES */
+
+/* CONTRASTE DOS BOTOES */
+
+.btn.btn-primary,
+.btn.btn-secondary,
+.btn.btn-success,
+.btn.btn-danger,
+.btn.btn-warning,
+.btn.btn-info,
+.btn.btn-dark,
+.btn.btn-primary:hover,
+.btn.btn-secondary:hover,
+.btn.btn-success:hover,
+.btn.btn-danger:hover,
+.btn.btn-warning:hover,
+.btn.btn-info:hover,
+.btn.btn-dark:hover,
+.btn.btn-primary:focus,
+.btn.btn-secondary:focus,
+.btn.btn-success:focus,
+.btn.btn-danger:focus,
+.btn.btn-warning:focus,
+.btn.btn-info:focus,
+.btn.btn-dark:focus,
+.btn.btn-primary:active,
+.btn.btn-secondary:active,
+.btn.btn-success:active,
+.btn.btn-danger:active,
+.btn.btn-warning:active,
+.btn.btn-info:active,
+.btn.btn-dark:active {
+
+    color: #fff !important;
+
+}
+
+.btn.btn-primary i,
+.btn.btn-secondary i,
+.btn.btn-success i,
+.btn.btn-danger i,
+.btn.btn-warning i,
+.btn.btn-info i,
+.btn.btn-dark i {
+
+    color: #fff !important;
+
+}

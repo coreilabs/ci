@@ -12,7 +12,7 @@ abstract class BaseController extends Controller
     /**
      * Helpers globais carregados automaticamente
      */
-    protected $helpers = ['url', 'form', 'permission'];
+    protected $helpers = ['url', 'form', 'permission', 'format'];
 
     /**
      * Sessão global

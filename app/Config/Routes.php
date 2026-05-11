@@ -114,6 +114,16 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         'filter' => 'csrf'
     ]);
 
+    $routes->get('divisao-pacientes', 'PatientDivisionController::index', [
+        'filter' => 'permission:treatments.view,dashboard.view'
+    ]);
+    $routes->post('divisao-pacientes/(:num)/atribuir', 'PatientDivisionController::assign/$1', [
+        'filter' => 'csrf'
+    ]);
+    $routes->post('divisao-pacientes/(:num)/liberar', 'PatientDivisionController::release/$1', [
+        'filter' => 'csrf'
+    ]);
+
     $routes->get('financeiro', 'FinanceController::index', [
         'filter' => 'permission:finance.manage,dashboard.view'
     ]);
@@ -155,9 +165,6 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
 
     $routes->get('administrativo-clinico', 'AdminClinicalController::index', [
         'filter' => 'permission:clinical_admin.manage,dashboard.view'
-    ]);
-    $routes->post('administrativo-clinico/registros', 'AdminClinicalController::storeRecord', [
-        'filter' => 'csrf'
     ]);
     $routes->get('administrativo-clinico/modelos/(:num)', 'AdminClinicalController::editTemplate/$1', [
         'filter' => 'permission:clinical_admin.manage,dashboard.view'

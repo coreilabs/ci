@@ -283,6 +283,51 @@ TEXT MUTED.......... #6f8f91
 
 }
 
+.dark-mode .btn-primary,
+.dark-mode .btn-secondary,
+.dark-mode .btn-success,
+.dark-mode .btn-danger,
+.dark-mode .btn-warning,
+.dark-mode .btn-info,
+.dark-mode .btn-dark,
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-secondary:hover,
+.dark-mode .btn-success:hover,
+.dark-mode .btn-danger:hover,
+.dark-mode .btn-warning:hover,
+.dark-mode .btn-info:hover,
+.dark-mode .btn-dark:hover,
+.dark-mode .btn-primary:focus,
+.dark-mode .btn-secondary:focus,
+.dark-mode .btn-success:focus,
+.dark-mode .btn-danger:focus,
+.dark-mode .btn-warning:focus,
+.dark-mode .btn-info:focus,
+.dark-mode .btn-dark:focus,
+.dark-mode .btn-primary:active,
+.dark-mode .btn-secondary:active,
+.dark-mode .btn-success:active,
+.dark-mode .btn-danger:active,
+.dark-mode .btn-warning:active,
+.dark-mode .btn-info:active,
+.dark-mode .btn-dark:active {
+
+    color: #ffffff !important;
+
+}
+
+.dark-mode .btn-primary i,
+.dark-mode .btn-secondary i,
+.dark-mode .btn-success i,
+.dark-mode .btn-danger i,
+.dark-mode .btn-warning i,
+.dark-mode .btn-info i,
+.dark-mode .btn-dark i {
+
+    color: #ffffff !important;
+
+}
+
 /* =========================================================
    INPUTS
 ========================================================= */
