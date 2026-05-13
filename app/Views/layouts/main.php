@@ -81,6 +81,50 @@
 <!-- SCRIPTS DAS VIEWS -->
 <?= $this->renderSection('scripts') ?>
 
+<script>
+(function () {
+    if (!window.fetch) { return; }
+    var csrfName = '<?= csrf_token() ?>';
+    var csrfHash = '<?= csrf_hash() ?>';
+
+    function notify(item) {
+        if (window.Notification && Notification.permission === 'granted') {
+            new Notification(item.title || 'Notificacao', { body: item.body || '' });
+        }
+        $(document).Toasts && $(document).Toasts('create', {
+            class: 'bg-info',
+            title: item.title || 'Notificacao',
+            body: item.body || ''
+        });
+
+        var data = new FormData();
+        data.append(csrfName, csrfHash);
+        fetch('<?= base_url('notificacoes') ?>/' + item.user_notification_id + '/lida', { method: 'POST', body: data });
+    }
+
+    if (window.Notification && Notification.permission === 'default') {
+        Notification.requestPermission();
+    }
+
+    function poll() {
+        fetch('<?= base_url('notificacoes/pendentes') ?>')
+            .then(function (response) { return response.ok ? response.json() : []; })
+            .then(function (items) { (items || []).forEach(notify); })
+            .catch(function () {});
+    }
+
+    poll();
+    setInterval(poll, 30000);
+})();
+
+$(document).on('click', 'tr[data-href]', function (event) {
+    if ($(event.target).closest('a, button, input, select, textarea, form').length) {
+        return;
+    }
+    window.location = $(this).data('href');
+});
+</script>
+
 </body>
 
 </html>

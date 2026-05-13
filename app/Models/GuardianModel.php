@@ -9,6 +9,6 @@ class GuardianModel extends Model
     protected $table = 'guardians';
     protected $returnType = 'array';
     protected $useTimestamps = true;
-    protected $allowedFields = ['name', 'cpf', 'phone', 'email', 'relationship', 'address'];
+    protected $allowedFields = ['name', 'cpf', 'phone', 'email', 'relationship', 'address', 'zip_code', 'nationality'];
     protected $validationRules = ['name' => 'required|min_length[3]'];
 }

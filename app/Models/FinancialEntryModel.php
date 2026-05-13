@@ -11,6 +11,6 @@ class FinancialEntryModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = [
         'treatment_id', 'competence', 'type', 'description', 'amount',
-        'due_date', 'paid_at', 'status',
+        'due_date', 'paid_at', 'paid_amount', 'status', 'created_by', 'updated_by',
     ];
 }

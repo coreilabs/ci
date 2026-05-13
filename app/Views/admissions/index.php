@@ -3,11 +3,20 @@
 
 <?= $this->include('partials/alerts') ?>
 
+<?php
+$stepLabels = [
+    'responsavel' => 'Responsável',
+    'paciente' => 'Acolhido',
+    'financeiro' => 'Financeiro Inicial',
+    'confirmacao' => 'Confirmação',
+];
+?>
+
 <div class="card card-outline card-primary">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title">Admissoes</h3>
+        <h3 class="card-title">Admissões</h3>
         <a href="<?= base_url('admissoes/iniciar') ?>" class="btn btn-primary btn-sm">
-            <i class="fas fa-plus"></i> Nova admissao
+            <i class="fas fa-plus"></i> Nova Admissão
         </a>
     </div>
     <div class="card-body table-responsive">
@@ -16,17 +25,23 @@
                 <tr>
                     <th>#</th>
                     <th>Etapa</th>
-                    <th>Atualizado em</th>
-                    <th width="120">Acoes</th>
+                    <th>Atualizado Em</th>
+                    <th width="160">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($drafts as $draft): ?>
                     <tr>
                         <td><?= esc($draft['id']) ?></td>
-                        <td><?= esc($draft['step']) ?></td>
+                        <td><?= esc($stepLabels[$draft['step']] ?? ucfirst((string) $draft['step'])) ?></td>
                         <td><?= esc(human_datetime($draft['updated_at'])) ?></td>
-                        <td><a class="btn btn-info btn-sm" href="<?= base_url('admissoes/' . $draft['id'] . '/' . $draft['step']) ?>">Continuar</a></td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="<?= base_url('admissoes/' . $draft['id'] . '/' . $draft['step']) ?>">Continuar</a>
+                            <form method="post" action="<?= base_url('admissoes/' . $draft['id'] . '/excluir') ?>" class="d-inline" onsubmit="return confirm('Excluir esta admissão?')">
+                                <?= csrf_field() ?>
+                                <button class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 <?php if (empty($drafts)): ?>

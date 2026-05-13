@@ -11,6 +11,6 @@ class DocumentModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = [
         'treatment_id', 'template_id', 'category', 'name', 'body_snapshot',
-        'file_path', 'signed_file_path', 'version',
+        'file_path', 'signed_file_path', 'version', 'created_by', 'updated_by',
     ];
 }

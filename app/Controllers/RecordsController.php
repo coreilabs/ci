@@ -21,7 +21,12 @@ class RecordsController extends BaseController
             return redirect()->to('tratamentos/' . $treatmentId)->with('error', 'Paciente não está na sua lista de atendimento.');
         }
 
-        return view('records/create', ['treatment' => $treatment]);
+        return view('records/create', [
+            'treatment' => $treatment,
+            'record' => null,
+            'types' => $this->allowedRecordTypes(),
+            'action' => base_url('tratamentos/' . $treatmentId . '/prontuario'),
+        ]);
     }
 
     public function store(int $treatmentId)
@@ -49,6 +54,7 @@ class RecordsController extends BaseController
             'sae_execution' => $this->request->getPost('sae_execution'),
             'sae_evaluation' => $this->request->getPost('sae_evaluation'),
             'recorded_at' => datetime_local_to_sql($this->request->getPost('recorded_at')) ?? date('Y-m-d H:i:s'),
+            'created_by' => session('user.id'),
         ]);
 
         if ($this->request->getPost('create_event')) {
@@ -66,6 +72,82 @@ class RecordsController extends BaseController
         (new AuditLogModel())->write($treatmentId, 'record.created', ['record_id' => $recordId]);
 
         return redirect()->to('tratamentos/' . $treatmentId)->with('success', 'Registro incluido na timeline.');
+    }
+
+    public function edit(int $recordId)
+    {
+        $record = (new ClinicalRecordModel())->find($recordId);
+        if (! $record || ! $this->canEditRecord($record)) {
+            return redirect()->back()->with('error', 'Registro nao encontrado ou sem permissao de edicao.');
+        }
+
+        $treatment = (new TreatmentModel())->listWithPeople()->where('treatments.id', $record['treatment_id'])->first();
+
+        return view('records/create', [
+            'treatment' => $treatment,
+            'record' => $record,
+            'types' => $this->allowedRecordTypes(),
+            'action' => base_url('prontuario/' . $recordId . '/editar'),
+        ]);
+    }
+
+    public function update(int $recordId)
+    {
+        helper('format');
+
+        $record = (new ClinicalRecordModel())->find($recordId);
+        if (! $record || ! $this->canEditRecord($record)) {
+            return redirect()->back()->with('error', 'Registro nao encontrado ou sem permissao de edicao.');
+        }
+
+        (new ClinicalRecordModel())->update($recordId, [
+            'type' => $this->request->getPost('type'),
+            'title' => $this->request->getPost('title'),
+            'content' => $this->request->getPost('content'),
+            'sae_collection' => $this->request->getPost('sae_collection'),
+            'sae_diagnosis' => $this->request->getPost('sae_diagnosis'),
+            'sae_planning' => $this->request->getPost('sae_planning'),
+            'sae_execution' => $this->request->getPost('sae_execution'),
+            'sae_evaluation' => $this->request->getPost('sae_evaluation'),
+            'recorded_at' => datetime_local_to_sql($this->request->getPost('recorded_at')) ?? $record['recorded_at'],
+            'updated_by' => session('user.id'),
+        ]);
+
+        (new AuditLogModel())->write((int) $record['treatment_id'], 'record.updated', ['record_id' => $recordId]);
+
+        return redirect()->to('tratamentos/' . $record['treatment_id'])->with('success', 'Registro atualizado.');
+    }
+
+    private function canEditRecord(array $record): bool
+    {
+        return $this->isAdmin()
+            || hasPermission('records.edit_all')
+            || (int) $record['user_id'] === (int) session('user.id');
+    }
+
+    private function allowedRecordTypes(): array
+    {
+        if ($this->isAdmin()) {
+            return [
+                'medico' => 'Medico',
+                'psicologico' => 'Psicológico',
+                'terapeutico' => 'Terapeutico',
+                'enfermagem' => 'Enfermagem/SAE',
+            ];
+        }
+
+        $role = strtolower((string) session('user.role'));
+        if (strpos($role, 'enferm') !== false) {
+            return ['enfermagem' => 'Enfermagem/SAE'];
+        }
+        if ($this->isPsychologist()) {
+            return ['psicologico' => 'Psicológico'];
+        }
+        if (strpos($role, 'med') !== false) {
+            return ['medico' => 'Medico'];
+        }
+
+        return ['terapeutico' => 'Terapeutico'];
     }
 
     private function canRegisterForTreatment(int $treatmentId): bool

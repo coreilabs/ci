@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CalendarEventModel;
 use App\Models\FinancialEntryModel;
+use App\Models\AppSettingModel;
 use App\Models\TreatmentProfessionalModel;
 use App\Models\TreatmentModel;
 
@@ -21,15 +22,39 @@ class CalendarController extends BaseController
     public function events()
     {
         $events = [];
+        $billingTemplate = (new AppSettingModel())->value(
+            'whatsapp_billing_template',
+            'Olá, lembramos que existe uma mensalidade em aberto de {{acolhido}} no valor de {{valor}} com vencimento em {{vencimento}}.'
+        );
+
         $rows = (new CalendarEventModel())
-            ->select('calendar_events.*, financial_entries.amount, financial_entries.status AS financial_status, financial_entries.due_date, patients.name AS patient_name, users.name AS professional_name')
+            ->select('calendar_events.*, financial_entries.amount, financial_entries.status AS financial_status, financial_entries.due_date, financial_entries.description AS financial_description, patients.name AS patient_name, guardians.phone AS guardian_phone, users.name AS professional_name')
             ->join('financial_entries', 'financial_entries.id = calendar_events.source_id AND calendar_events.source_type = "finance"', 'left')
             ->join('treatments', 'treatments.id = calendar_events.treatment_id', 'left')
             ->join('patients', 'patients.id = treatments.patient_id', 'left')
+            ->join('guardians', 'guardians.id = treatments.guardian_id', 'left')
             ->join('users', 'users.id = calendar_events.professional_user_id', 'left')
             ->findAll();
 
         foreach ($rows as $event) {
+            $guardianPhone = preg_replace('/\D+/', '', (string) ($event['guardian_phone'] ?? ''));
+            if ($guardianPhone && strpos($guardianPhone, '55') !== 0) {
+                $guardianPhone = '55' . $guardianPhone;
+            }
+
+            $amount = (float) ($event['amount'] ?? 0);
+            $dueDate = $this->shortDate($event['due_date'] ?? null);
+            $message = str_replace(
+                ['{{acolhido}}', '{{valor}}', '{{vencimento}}', '{{descricao}}'],
+                [
+                    $event['patient_name'] ?? '',
+                    'R$ ' . number_format($amount, 2, ',', '.'),
+                    $dueDate,
+                    $event['financial_description'] ?? $event['title'],
+                ],
+                $billingTemplate
+            );
+
             $events[] = [
                 'id' => $event['id'],
                 'title' => $this->eventTitle($event),
@@ -44,15 +69,32 @@ class CalendarController extends BaseController
                     'patient_name' => $event['patient_name'],
                     'professional_name' => $event['professional_name'],
                     'amount' => $event['amount'],
+                    'formatted_amount' => 'R$ ' . number_format($amount, 2, ',', '.'),
                     'financial_status' => $event['financial_status'],
                     'due_date' => $event['due_date'],
                     'formatted_due_date' => human_date($event['due_date']),
+                    'financial_description' => $event['financial_description'],
+                    'guardian_phone' => $guardianPhone,
+                    'billing_whatsapp_message' => $message,
+                    'billing_whatsapp_url' => $guardianPhone ? 'https://wa.me/' . $guardianPhone . '?text=' . rawurlencode($message) : '',
                     'notes' => $event['notes'],
+                    'actions' => $event['source_type'] === 'finance'
+                        ? ['pagar', 'reagendar', 'whatsapp']
+                        : ($event['source_type'] === 'psychology_assignment' ? ['chamar_coordenacao'] : []),
                 ],
             ];
         }
 
         return $this->response->setJSON($events);
+    }
+
+    private function shortDate(?string $date): string
+    {
+        if (! $date) {
+            return '';
+        }
+
+        return date('d/m/y', strtotime($date));
     }
 
     private function eventTitle(array $event): string
@@ -83,6 +125,7 @@ class CalendarController extends BaseController
             'starts_at' => datetime_local_to_sql($this->request->getPost('starts_at')),
             'ends_at' => datetime_local_to_sql($this->request->getPost('ends_at')),
             'notes' => $this->request->getPost('notes'),
+            'created_by' => session('user.id'),
         ]);
 
         return redirect()->to('agenda')->with('success', 'Evento criado.');
@@ -100,6 +143,7 @@ class CalendarController extends BaseController
         (new CalendarEventModel())->update($id, [
             'starts_at' => datetime_local_to_sql($this->request->getPost('starts_at')),
             'ends_at' => datetime_local_to_sql($this->request->getPost('ends_at')),
+            'updated_by' => session('user.id'),
         ]);
 
         if ($event['source_type'] === 'finance' && $event['source_id']) {
@@ -127,14 +171,21 @@ class CalendarController extends BaseController
 
     public function payFinancialEvent(int $id)
     {
+        helper('format');
+
         $event = (new CalendarEventModel())->find($id);
         if (! $event || $event['source_type'] !== 'finance' || ! $event['source_id']) {
             return $this->response->setStatusCode(404)->setJSON(['error' => 'Cobranca nao encontrada.']);
         }
 
+        $entry = (new FinancialEntryModel())->find($event['source_id']);
+        $paidAmount = money_to_float($this->request->getPost('paid_amount') ?: (string) ($entry['amount'] ?? 0));
+
         (new FinancialEntryModel())->update($event['source_id'], [
             'status' => 'paid',
             'paid_at' => date('Y-m-d H:i:s'),
+            'paid_amount' => $paidAmount,
+            'updated_by' => session('user.id'),
         ]);
 
         return $this->response->setJSON(['ok' => true]);

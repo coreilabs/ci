@@ -12,6 +12,6 @@ class ClinicalRecordModel extends Model
     protected $allowedFields = [
         'treatment_id', 'user_id', 'type', 'title', 'content',
         'sae_collection', 'sae_diagnosis', 'sae_planning', 'sae_execution',
-        'sae_evaluation', 'recorded_at',
+        'sae_evaluation', 'recorded_at', 'created_by', 'updated_by',
     ];
 }

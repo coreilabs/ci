@@ -641,3 +641,185 @@ TEXT MUTED.......... #6f8f91
     
     color: white !important;
 }
+
+.dark-mode .btn-warning {
+    color: white !important;
+}
+
+.dark-mode .badge,
+.dark-mode .badge-primary,
+.dark-mode .badge-secondary,
+.dark-mode .badge-success,
+.dark-mode .badge-danger,
+.dark-mode .badge-warning,
+.dark-mode .badge-info,
+.dark-mode .badge-dark {
+    color: #ffffff !important;
+}
+
+.dark-mode .table-danger,
+.dark-mode .table-danger > td,
+.dark-mode .table-danger > th,
+.dark-mode .table-warning,
+.dark-mode .table-warning > td,
+.dark-mode .table-warning > th,
+.dark-mode .table-info,
+.dark-mode .table-info > td,
+.dark-mode .table-info > th,
+.dark-mode .table-success,
+.dark-mode .table-success > td,
+.dark-mode .table-success > th,
+.dark-mode .table-primary,
+.dark-mode .table-primary > td,
+.dark-mode .table-primary > th,
+.dark-mode .table-secondary,
+.dark-mode .table-secondary > td,
+.dark-mode .table-secondary > th,
+.dark-mode .table-light,
+.dark-mode .table-light > td,
+.dark-mode .table-light > th {
+    color: #111111 !important;
+}
+
+.dark-mode .finance-overdue,
+.dark-mode .finance-overdue td,
+.dark-mode .finance-overdue a:not(.btn) {
+    color: #111111 !important;
+}
+
+.dark-mode .ql-toolbar.ql-snow,
+.dark-mode .ql-container.ql-snow,
+.dark-mode .quill-editor,
+.dark-mode .ql-editor {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border-color: #ced4da !important;
+}
+
+.dark-mode .ql-toolbar.ql-snow .ql-picker,
+.dark-mode .ql-toolbar.ql-snow .ql-picker-label,
+.dark-mode .ql-toolbar.ql-snow .ql-picker-item,
+.dark-mode .ql-toolbar.ql-snow button,
+.dark-mode .ql-editor,
+.dark-mode .ql-editor p,
+.dark-mode .ql-editor span,
+.dark-mode .ql-editor strong,
+.dark-mode .ql-editor em,
+.dark-mode .ql-editor li {
+    color: #111111 !important;
+}
+
+.dark-mode .ql-toolbar.ql-snow .ql-stroke {
+    stroke: #111111 !important;
+}
+
+.dark-mode .ql-toolbar.ql-snow .ql-fill {
+    fill: #111111 !important;
+}
+
+.dark-mode .admission-contract-editor,
+.dark-mode .admission-contract-editor .ql-editor,
+.dark-mode .admission-contract-editor .ql-editor *,
+.dark-mode .ql-container .admission-contract-editor,
+.dark-mode .ql-container .admission-contract-editor * {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+
+.dark-mode .admission-contract-editor [style*="color: rgb(255, 255, 255)"],
+.dark-mode .admission-contract-editor [style*="color:#fff"],
+.dark-mode .admission-contract-editor [style*="color: #fff"],
+.dark-mode .admission-contract-editor [style*="color:white"],
+.dark-mode .admission-contract-editor [style*="color: white"] {
+    color: #111111 !important;
+}
+
+.dark-mode .custom-control-label {
+    color: #111111 !important;
+}
+
+.dark-mode .admission-family-portal-label {
+    color: #ffffff !important;
+}
+
+.dark-mode .template-variable-box {
+    background: #eef3f6 !important;
+    color: #111111 !important;
+    border-color: #ced4da !important;
+}
+
+.dark-mode .template-variable-box code {
+    color: #0d2430 !important;
+    background: #ffffff !important;
+    border: 1px solid #d7e0e5 !important;
+}
+
+.dark-mode .ql-container.ql-snow .ql-editor,
+.dark-mode .ql-container.ql-snow .ql-editor * {
+    color: #111111 !important;
+}
+
+.dark-mode .calendar-day-modal .modal-content,
+.dark-mode .calendar-day-modal .modal-header,
+.dark-mode .calendar-day-modal .modal-body,
+.dark-mode .calendar-day-modal .modal-footer,
+.dark-mode .calendar-day-modal .calendar-event-actions {
+    background: #1f2933 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .calendar-day-modal .modal-title,
+.dark-mode .calendar-day-modal label,
+.dark-mode .calendar-day-modal h5,
+.dark-mode .calendar-day-modal p,
+.dark-mode .calendar-day-modal small,
+.dark-mode .calendar-day-modal .text-muted {
+    color: #ffffff !important;
+}
+
+.dark-mode .calendar-day-modal .list-group-item {
+    background: #eef3f6 !important;
+    color: #14212b !important;
+    border-color: rgba(255, 255, 255, .14) !important;
+    border-left: 4px solid transparent;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.dark-mode .calendar-day-modal .list-group-item:hover,
+.dark-mode .calendar-day-modal .list-group-item:focus {
+    background: #dce9ee !important;
+    color: #14212b !important;
+    border-left-color: #17a2b8 !important;
+}
+
+.dark-mode .calendar-day-modal .list-group-item.active,
+.dark-mode .calendar-day-modal .list-group-item.selected {
+    background: #cfe6ee !important;
+    color: #0d2430 !important;
+    border-color: rgba(23, 162, 184, .45) !important;
+    border-left-color: #17a2b8 !important;
+    box-shadow: inset 0 0 0 1px rgba(23, 162, 184, .22);
+}
+
+.dark-mode .calendar-day-modal .form-control {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border-color: #ced4da !important;
+}
+
+.dark-mode .info-box[class*="bg-"],
+.dark-mode .info-box[class*="bg-"] .info-box-content,
+.dark-mode .info-box[class*="bg-"] .info-box-text,
+.dark-mode .info-box[class*="bg-"] .info-box-number,
+.dark-mode .info-box[class*="bg-"] .info-box-icon,
+.dark-mode .info-box[class*="bg-"] i {
+    color: #ffffff !important;
+}
+
+.dark-mode a.info-box[class*="bg-"]:hover,
+.dark-mode a.info-box[class*="bg-"]:focus {
+    color: #ffffff !important;
+    text-decoration: none;
+}

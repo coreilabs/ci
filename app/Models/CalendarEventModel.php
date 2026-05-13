@@ -11,6 +11,6 @@ class CalendarEventModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = [
         'treatment_id', 'professional_user_id', 'source_type', 'source_id', 'title', 'category',
-        'starts_at', 'ends_at', 'notes',
+        'starts_at', 'ends_at', 'notes', 'created_by', 'updated_by',
     ];
 }

@@ -10,6 +10,7 @@
     <div class="card-body">
 
         <form method="post" action="<?= base_url('usuarios/store') ?>">
+            <?= csrf_field() ?>
 
             <div class="form-group">
                 <label>Nome</label>

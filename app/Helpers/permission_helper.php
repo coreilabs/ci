@@ -10,6 +10,10 @@ if (!function_exists('hasPermission')) {
             return false;
         }
 
+        if (($user['role'] ?? null) === 'admin') {
+            return true;
+        }
+
         return in_array($permission, $user['permissions'], true);
     }
 }

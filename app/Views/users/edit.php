@@ -11,8 +11,9 @@
     <div class="card-body">
 
         <form method="post"
-              action="<?= base_url('users/update/' . $user['id']) ?>"
+              action="<?= base_url('usuarios/update/' . $user['id']) ?>"
               id="formUser">
+            <?= csrf_field() ?>
 
             <!-- NOME -->
             <div class="form-group">

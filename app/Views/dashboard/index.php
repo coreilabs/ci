@@ -10,7 +10,7 @@
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3><?= esc($activeTreatments ?? 0) ?></h3>
-                    <p>Tratamentos ativos</p>
+                    <p>Internações Ativas</p>
                 </div>
                 <div class="icon"><i class="fas fa-notes-medical"></i></div>
                 <a href="<?= base_url('tratamentos') ?>" class="small-box-footer">Abrir tratamentos <i class="fas fa-arrow-circle-right"></i></a>
@@ -53,7 +53,7 @@
             <div class="info-box">
                 <span class="info-box-icon bg-primary"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Pacientes cadastrados</span>
+                    <span class="info-box-text">Acolhidos Cadastrados</span>
                     <span class="info-box-number"><?= esc($totalPatients ?? 0) ?></span>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped mb-0">
-                        <thead><tr><th>Horário</th><th>Paciente</th><th>Categoria</th><th>Profissional</th></tr></thead>
+                        <thead><tr><th>Horário</th><th>Acolhido</th><th>Categoria</th><th>Profissional</th></tr></thead>
                         <tbody>
                             <?php foreach ($todayEvents as $event): ?>
                                 <tr>
@@ -111,7 +111,7 @@
                 <div class="card-header"><h3 class="card-title">Últimas evoluções</h3></div>
                 <div class="card-body p-0">
                     <table class="table table-hover mb-0">
-                        <thead><tr><th>Paciente</th><th>Tipo</th><th>Profissional</th><th>Data</th></tr></thead>
+                        <thead><tr><th>Acolhido</th><th>Tipo</th><th>Profissional</th><th>Data</th></tr></thead>
                         <tbody>
                             <?php foreach ($recentRecords as $record): ?>
                                 <tr>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-sm mb-0">
-                        <thead><tr><th>Paciente</th><th>Psicólogo</th><th>Data</th></tr></thead>
+                        <thead><tr><th>Acolhido</th><th>Psicólogo</th><th>Data</th></tr></thead>
                         <tbody>
                             <?php foreach ($weeklyPsychology as $event): ?>
                                 <tr>
@@ -165,7 +165,7 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between">
                                 <span><?= esc($item['professional_name']) ?></span>
-                                <span><?= esc($item['total']) ?> paciente(s)</span>
+                                <span><?= esc($item['total']) ?> acolhido(s)</span>
                             </div>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-success" style="width: <?= min(100, ((int) $item['total'] / $total) * 100) ?>%"></div>
@@ -173,7 +173,7 @@
                         </div>
                     <?php endforeach; ?>
                     <?php if (empty($psychologyWorkload)): ?>
-                        <p class="text-muted mb-0">Nenhum paciente vinculado à psicologia.</p>
+                        <p class="text-muted mb-0">Nenhum acolhido vinculado à psicologia.</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                 <div class="card-header"><h3 class="card-title">Próximas cobranças</h3></div>
                 <div class="card-body p-0">
                     <table class="table table-sm mb-0">
-                        <thead><tr><th>Paciente</th><th>Vencimento</th><th>Valor</th></tr></thead>
+                        <thead><tr><th>Acolhido</th><th>Vencimento</th><th>Valor</th></tr></thead>
                         <tbody>
                             <?php foreach ($upcomingCharges as $charge): ?>
                                 <tr>

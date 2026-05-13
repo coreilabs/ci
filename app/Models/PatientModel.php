@@ -9,6 +9,6 @@ class PatientModel extends Model
     protected $table = 'patients';
     protected $returnType = 'array';
     protected $useTimestamps = true;
-    protected $allowedFields = ['guardian_id', 'name', 'cpf', 'birth_date', 'phone', 'address'];
+    protected $allowedFields = ['guardian_id', 'name', 'cpf', 'birth_date', 'phone', 'address', 'zip_code', 'nationality'];
     protected $validationRules = ['guardian_id' => 'required|integer', 'name' => 'required|min_length[3]'];
 }

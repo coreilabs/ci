@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AuditLogModel;
+use App\Models\AppSettingModel;
 use App\Models\CalendarEventModel;
 use App\Models\TreatmentProfessionalModel;
 
@@ -14,14 +15,17 @@ class PatientDivisionController extends BaseController
     {
         $db = db_connect();
 
+        $slaDays = (int) (new AppSettingModel())->value('psychology_sla_days', '15');
+
         $patients = $db->table('treatments')
-            ->select('treatments.id, treatments.admission_date, patients.name AS patient_name, guardians.name AS guardian_name, tp.user_id AS psychologist_id, tp.next_attendance_at, users.name AS psychologist_name')
+            ->select('treatments.id, treatments.admission_date, patients.name AS patient_name, guardians.name AS guardian_name, tp.user_id AS psychologist_id, tp.next_attendance_at, users.name AS psychologist_name, last_records.last_psychology_at')
             ->join('patients', 'patients.id = treatments.patient_id')
             ->join('guardians', 'guardians.id = treatments.guardian_id')
             ->join('treatment_professionals tp', 'tp.treatment_id = treatments.id AND tp.specialty = "psicologia"', 'left')
             ->join('users', 'users.id = tp.user_id', 'left')
+            ->join('(SELECT treatment_id, MAX(recorded_at) AS last_psychology_at FROM clinical_records WHERE type = "psicologico" GROUP BY treatment_id) last_records', 'last_records.treatment_id = treatments.id', 'left')
             ->where('treatments.status', 'active')
-            ->orderBy('patients.name', 'ASC')
+            ->orderBy('COALESCE(last_records.last_psychology_at, treatments.admission_date)', 'ASC', false)
             ->get()
             ->getResultArray();
 
@@ -31,6 +35,7 @@ class PatientDivisionController extends BaseController
             'isAdmin' => $this->isAdmin(),
             'canManageDivision' => $this->isAdmin() || $this->isPsychologist(),
             'currentUserId' => (int) session('user.id'),
+            'slaDays' => $slaDays,
         ]);
     }
 
